@@ -1,1 +1,0 @@
-{"uuid":"89cc45f5-ed73-4dd1-82b5-f3457d0673b1","historyId":"c2e0bee2126b34c417740b9b73501b4f","labels":[{"name":"suite","value":"example.weather.WeatherClientTest"},{"name":"package","value":"example.weather.WeatherClientTest"}],"name":"shouldCallWeatherService()","status":"passed","stage":"finished","start":1584443121864,"stop":1584443121954}
