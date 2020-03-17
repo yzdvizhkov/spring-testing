@@ -1,10 +1,10 @@
 package example.weather;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
@@ -15,7 +15,7 @@ import static org.hamcrest.core.Is.is;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.MockitoAnnotations.initMocks;
 
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 public class WeatherClientTest {
 
     private WeatherClient subject;
@@ -23,7 +23,7 @@ public class WeatherClientTest {
     @Mock
     private RestTemplate restTemplate;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         initMocks(this);
         subject = new WeatherClient(restTemplate, "http://localhost:8089", "someAppId");

@@ -4,35 +4,69 @@ plugins {
 	id 'java'
 	id 'idea'
 	id 'eclipse'
+	id "io.qameta.allure" version "2.8.1"
 }
 
 group = 'com.hamvocke.spring-testing'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
 
 repositories {
 	mavenCentral()
 }
 
+ext {
+	junitJupiterVersion = '5.3.2'
+}
+
+allure {
+	autoconfigure = true
+	version = '2.12.1'
+}
+
+
 dependencies {
+	testCompile("org.junit.jupiter:junit-jupiter-engine:${junitJupiterVersion}")
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	compile group: 'io.qameta.allure', name: 'allure-junit-platform', version: '2.0-BETA19'
 	runtimeOnly 'org.postgresql:postgresql'
 	runtimeOnly 'com.h2database:h2'
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
-
+	testCompile("org.junit.jupiter:junit-jupiter-api")
 	testImplementation('io.rest-assured:rest-assured:3.0.3')
 	testImplementation('com.github.tomakehurst:wiremock:2.25.1')
-	testImplementation('org.seleniumhq.selenium:selenium-chrome-driver:3.141.59')
-	testImplementation('org.seleniumhq.selenium:selenium-remote-driver:3.141.59')
-	testImplementation('org.seleniumhq.selenium:selenium-api:3.141.59')
-	testImplementation('au.com.dius:pact-jvm-consumer-junit:4.0.1')
-	testImplementation('au.com.dius:pact-jvm-provider-spring:4.0.1')
+	testImplementation group: 'com.codeborne', name: 'selenide', version: '5.2.4'
+	testImplementation('au.com.dius:pact-jvm-consumer-junit:4.0.7')
+	testImplementation('au.com.dius:pact-jvm-provider-spring:4.0.7')
 	testImplementation('io.github.bonigarcia:webdrivermanager:3.7.1')
 }
+
+
+task startDatabase(type: Exec) {
+	commandLine './startDatabase.sh'
+}
+
+task startDC(type: Exec) {
+	commandLine './startDC.sh'
+}
+
+task runBuild {
+	dependsOn 'startDC'
+	dependsOn 'startDatabase'
+	dependsOn 'bootRun'
+	tasks.findByName('startDatabase').mustRunAfter 'startDC'
+	tasks.findByName('bootRun').mustRunAfter 'startDatabase'
+}
+
 
 test {
 	useJUnitPlatform()
 }
+
+
+
+

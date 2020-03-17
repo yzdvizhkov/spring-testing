@@ -4,14 +4,14 @@ import example.person.Person;
 import example.person.PersonRepository;
 import example.weather.WeatherResponse;
 import example.weather.WeatherClient;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 
 import java.util.Optional;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
 import static org.mockito.BDDMockito.anyString;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.MockitoAnnotations.initMocks;
@@ -27,7 +27,7 @@ public class ExampleControllerTest {
     private WeatherClient weatherClient;
 
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         initMocks(this);
         subject = new ExampleController(personRepository, weatherClient);

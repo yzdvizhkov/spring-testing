@@ -1,0 +1,1 @@
+{"uuid":"602b35ca-fd23-443d-bbb4-16c7c0836a6c","historyId":"28a890b9f7e89417af036cf20b073d5a","labels":[{"name":"suite","value":"example.HelloE2ESeleniumTest"},{"name":"package","value":"example.HelloE2ESeleniumTest"}],"name":"searchStackOverflowWorksCorrectly()","status":"passed","stage":"finished","start":1584378618155,"stop":1584378623576}

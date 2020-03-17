@@ -1,0 +1,1 @@
+{"uuid":"d1bef8d1-ab3b-4e08-9d78-13ed69ed22a4","historyId":"acb83db14fc64a2ad6a6ec486d9fe702","labels":[{"name":"suite","value":"example.ExampleControllerTest"},{"name":"package","value":"example.ExampleControllerTest"}],"name":"shouldReturnFullNameOfAPerson()","status":"passed","stage":"finished","start":1584443474233,"stop":1584443474846}

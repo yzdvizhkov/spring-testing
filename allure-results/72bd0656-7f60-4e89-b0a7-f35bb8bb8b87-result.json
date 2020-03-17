@@ -1,0 +1,1 @@
+{"uuid":"72bd0656-7f60-4e89-b0a7-f35bb8bb8b87","historyId":"97106c54b42baff745eeef723ebd3897","labels":[{"name":"suite","value":"example.HelloE2ERestTest"},{"name":"package","value":"example.HelloE2ERestTest"}],"name":"shouldReturnHelloWorld()","status":"passed","stage":"finished","start":1584365785099,"stop":1584365786863}

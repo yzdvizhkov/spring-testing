@@ -1,0 +1,1 @@
+{"uuid":"b96ab751-627c-4abe-a060-6841221f2b5d","historyId":"7933f151ddeba79a29d22deced99d5dc","labels":[{"name":"suite","value":"example.weather.WeatherResponseTest"},{"name":"package","value":"example.weather.WeatherResponseTest"}],"name":"shouldDeserializeJson()","status":"passed","stage":"finished","start":1584443139496,"stop":1584443139655}

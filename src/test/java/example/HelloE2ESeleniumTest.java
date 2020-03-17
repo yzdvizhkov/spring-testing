@@ -1,54 +1,39 @@
 package example;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
+import com.codeborne.selenide.*;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import static org.hamcrest.CoreMatchers.containsString;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Selenide.*;
+import static java.util.Arrays.asList;
 
-@RunWith(SpringRunner.class)
+
+@ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class HelloE2ESeleniumTest {
-
-    private WebDriver driver;
+public class HelloE2ESeleniumTest extends BaseTest {
 
     @LocalServerPort
     private int port;
 
-    @BeforeClass
-    public static void setUpClass() throws Exception {
-        WebDriverManager.chromedriver().version("78").setup();
-    }
-
-    @Before
-    public void setUp() throws Exception {
-        driver = new ChromeDriver();
-    }
-
-    @After
-    public void tearDown() {
-        if (driver != null) {
-            driver.quit();
-        }
+    @Test
+    public void helloPageHasTextHelloWorld() {
+        open(String.format("http://localhost:%s/hello", port));
+        SelenideElement body = $(Selectors.byCssSelector("body"));
+        body.shouldHave(text("Hello World!"));
     }
 
     @Test
-    public void helloPageHasTextHelloWorld() {
-        driver.navigate().to(String.format("http://localhost:%s/hello", port));
-
-        WebElement body = driver.findElement(By.tagName("body"));
-
-        assertThat(body.getText(), containsString("Hello World!"));
+    public void searchStackOverflowWorksCorrectly() {
+        open("https://selenide.org/");
+        SelenideElement headerImage = $(Selectors.byCssSelector("header img"));
+        SelenideElement newsLine = $(Selectors.byCssSelector(".news-line[style='display: block;']"));
+        ElementsCollection menuPagesLinks = $$(Selectors.byCssSelector(".main-menu-pages a"));
+        headerImage.shouldBe(Condition.visible);
+        newsLine.shouldBe(Condition.visible);
+        menuPagesLinks.shouldHave(CollectionCondition.exactTexts(asList("Quick start", "Docs", "FAQ", "Blog", "Javadoc", "Users", "Quotes")));
     }
 }

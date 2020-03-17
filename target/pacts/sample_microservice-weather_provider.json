@@ -15,7 +15,7 @@
       "response": {
         "status": 200,
         "headers": {
-          "Content-Type": "application/json; charset\u003dUTF-8"
+          "Content-Type": "application/json; charset=UTF-8"
         },
         "body": {
           "latitude": 47.20296790272209,
@@ -127,7 +127,7 @@
       "version": "3.0.0"
     },
     "pact-jvm": {
-      "version": "4.0.1"
+      "version": "4.0.7"
     }
   }
 }
